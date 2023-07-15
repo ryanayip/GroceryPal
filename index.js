@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import {getDatabase, ref, push, onValue} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import {getDatabase, ref, push, onValue, remove} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 const appSettings = {
     databaseURL: "https://grocerypal-955f0-default-rtdb.firebaseio.com/"
 }
@@ -13,20 +13,24 @@ const input = document.getElementById('input-field');
 let itemList = document.getElementById('item-list');
 
 onValue(shoppingListInDB, function(snapshot) {
-    let data = Object.entries(snapshot.val());
+    
+    if (snapshot.exists()) {
+        let data = Object.entries(snapshot.val());
 
-    console.log(snapshot.val())
+        console.log(snapshot.val())
 
-    clearList()
+        clearList()
 
-    for (let i = 0; i < data.length; i++) {
-        let currentItem = data[i]
-        let currentItemID = currentItem[0]
-        let currentItemValue = currentItem[1]
-        
-        addItem(currentItem)
+        for (let i = 0; i < data.length; i++) {
+            let currentItem = data[i]
+            let currentItemID = currentItem[0]
+            let currentItemValue = currentItem[1]
+            
+            addItem(currentItem)
+        }
+    } else {
+        itemList.innerHTML = '';
     }
-
  
 })
 
@@ -45,6 +49,11 @@ function addItem(item) {
    
     let newEl = document.createElement('li');
     newEl.textContent = itemValue;
+
+    newEl.addEventListener('click', () => {
+        remove(ref(database, `shoppingList/${itemID}`))
+    })
+
     itemList.appendChild(newEl);
 }
 
@@ -57,13 +66,13 @@ addBtn.addEventListener('click', () => {
     if (inputValue === '') {
         return;
     }
-    //add item to DOM list and log
+    //add item to DOM list 
     addItem(inputValue);
-    console.log(`${inputValue} added to list`);
 
-    //push item to database and log
+
+    //push item to database and 
     push(shoppingListInDB, inputValue);
-    console.log(`${inputValue} added to database`);
+
     
     //clear input field after click
     clearItem();

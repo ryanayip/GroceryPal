@@ -61,5 +61,17 @@ ul li {
     list-style: none;
     flex-grow: 1;
     text-align: center;
+
+    
 }
     
+ul li:hover {
+    background-color: #D92C49;
+    color: #FDFDFD;
+    cursor: pointer;
+}
+
+ul li:active {
+    background-color: #80334D;
+    color: #FDFDFD;
+}
