@@ -31,13 +31,23 @@ input {
 
 button {
     color: #FDFDFD;
-    background-color: #D92C49;
+    background-color: #F24973;
     border: 0;
     padding: 15px;
     border-radius: 8px;
     font-size: 20px;
     text-align: center;
     font-family: 'Rubik', sans-serif;
+}
+
+button:active {
+    background-color: #80334D;
+}
+
+button:hover {
+    
+    background-color: #D92C49;
+    cursor: pointer;
 }
 
 ul {
@@ -61,7 +71,7 @@ ul li {
     list-style: none;
     flex-grow: 1;
     text-align: center;
-
+    user-select: none;
     
 }
     
