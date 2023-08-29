@@ -1,6 +1,6 @@
 {
-  "name": "GroceryBuddy",
-  "short_name": "GroceryBuddy",
+  "name": "GroceryPal",
+  "short_name": "GroceryPal",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
